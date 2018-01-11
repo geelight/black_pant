@@ -45,6 +45,11 @@ return [
             ],
         ],
         */
+
     ],
+    'as access' => [
+        'class' => 'common\components\AccessControl',
+    ],
+
     'params' => $params,
 ];

@@ -39,6 +39,22 @@ class SiteController extends Controller
                 ],
             ],
         ];
+        /*return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'matchCallback' => function ($rule, $action) {
+                            // 1月11号才可以访问 /site/index 方法
+                            return date('m-d') === '01-11';
+                        }
+                    ],
+                ],
+            ]
+        ];*/
+
     }
 
     /**
@@ -60,6 +76,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        //pr(date('m-d'),true);
         return $this->render('index');
     }
 

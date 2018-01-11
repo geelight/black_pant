@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Column;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -19,14 +20,44 @@ class ColumnController extends Controller
      */
     public function behaviors()
     {
-        return [
+        /*return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+        ];*/
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // 默认只能 GET 方式访问
+                    ['allow' => true, 'actions' => ['index', 'view'], 'verbs' => ['GET']],
+                    // 默认只能 POST 方式访问
+                    ['allow' => true, 'actions' => [], 'verbs' => ['POST']],
+                    // 登录用户 POST 操作
+                    ['allow' => true, 'actions' => [], 'verbs' => ['POST'], 'roles' => ['@']],
+                    // 登录用户才能操作
+                    ['allow' => true, 'actions' => ['create',], 'roles' => ['@']],
+                ]
+                /*'rules' => [
+                    [
+                        'allow' => false,
+                        'actions' => ['index'],
+                        'denyCallback' => function ($rule, $action) {
+                            // 访问 /column/index 页面的时候，跳转到 /site/index 并提示没有权限
+                            Yii::$app->session->setFlash('warning', '您没有权限');
+                            return $this->redirect(['site/index']);
+                        }
+                    ],
+                ],*/
+
+            ],
         ];
+
+
+
     }
 
     /**
