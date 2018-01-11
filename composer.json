@@ -29,6 +29,13 @@
     "config": {
         "process-timeout": 1800
     },
+    "autoload": {
+        "files": [
+            "common/helpers/GlobalFunctions.php"
+        ]
+    },
+
+
     "repositories": [
         {
             "type": "composer",
